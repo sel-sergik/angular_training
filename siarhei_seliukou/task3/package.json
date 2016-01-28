@@ -1,0 +1,23 @@
+{
+  "name": "AngularTrainingTask1",
+  "namelower": "angular_training_task1",
+  "version": "1.0.0",
+  "description": "AngularJS project for form fields validators",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sel-sergik/angular_training.git"
+  },
+  "dependencies": {
+    "angular": "1.4.8",
+    "bootstrap": "3.3.6",
+    "angular-route": "1.4.8",
+    "font-awesome": "4.5.0",
+    "angular-cookies": "1.4.8",
+    "jquery": "1.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Siarhei Seliukou",
+  "license": "ISC"
+}
