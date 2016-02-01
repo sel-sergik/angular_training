@@ -1,14 +1,16 @@
 [
 	{
-		"name": "Siarhei",
-		"lastname": "Seliukou",
+		"name": "Сергей.Селюков",
 		"login": "serg-sel",
-		"password": "siarheiSeliukou"
+		"password": "siarheiSeliukou",
+		"age": 26,
+		"birthdate": "03 09 1989"
 	},
 	{
-		"name": "Ivan", 
-		"lastname": "Ivanov",
+		"name": "Иван.Иванов", 
 		"login": "ivan-vvvv",
-		"password": "ivanIvanov"
+		"password": "ivanIvanov",
+		"age": 31,
+		"birthdate": "12 12 1984"
 	}
 ]

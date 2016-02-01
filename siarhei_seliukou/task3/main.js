@@ -1,39 +1,45 @@
 'use strict';
 
-var authApp = angular.module('authApp',['ngRoute', 'ngCookies']);
-authApp.controller('LoginController', [ '$scope', '$http', '$cookies', '$location' , LoginController]);
-authApp.controller('ForgotController', [ '$scope', ForgotController]);
-authApp.controller('DashboardController', [ '$scope', DashboardController]);
+var authApp = angular.module('apps',['ui.router', 'ngCookies', 'pascalprecht.translate']);
 
-authApp.config(['$routeProvider',
-	function($routeProvider) {
-		$routeProvider.
-			when('/login', {
-				templateUrl: 'app/partials/login.html',
-				controller: 'LoginController'
-			}).
-			when('/forgot', {
-				templateUrl: 'app/partials/forgot.html',
-				controller: 'ForgotController'
-			}).
-			when('/dashboard', {
-				templateUrl: 'app/partials/dashboard.html',
-				controller: 'DashboardController'
-			}).
-			otherwise({
-				redirectTo: '/login'
-			});
-}]);
+authApp
+.config(function($stateProvider, $urlRouterProvider) {
 
-authApp.directive('showtab', function () {
-	return {
-		link: function (scope, element, attrs) {
-			element.click(function(e) {
-				e.preventDefault();
-				$(element).tab('show');
-			});
-		}
-	};
+	// For any unmatched url, redirect to /login
+	$urlRouterProvider.otherwise("/login");
+	//
+	// Now set up the states
+	$stateProvider
+		.state('login', {
+			url: "/login",
+			templateUrl: "app/partials/login.html",
+			controller: 'LoginController'
+		})
+		.state('logout', {
+			url: "/logout",
+			controller: 'LogoutController'
+		})
+		.state('forgot', {
+			url: "/forgot",
+			templateUrl: "app/partials/forgot.html",
+			controller: 'ForgotController'
+		})
+		.state('dashboard', {
+			abstract: true,
+			url: "/dashboard",
+			templateUrl: "app/partials/dashboard.html",
+			controller: 'DashboardController'
+		})
+		.state('dashboard.show', {
+				// url will become '/dashboard/show'
+				url: '/show',
+				templateUrl: "app/partials/dashboard.show.html",
+		})
+		.state('dashboard.edit', {
+				// url will become '/dashboard/edit'
+				url: '/edit',
+				templateUrl: "app/partials/dashboard.edit.html",
+		});
 });
 
 var NAME_REGEXP = /^[А-Я]{1}[а-я]{2,}\.[А-Я]{1}[а-я]{2,}$/;
@@ -75,37 +81,6 @@ authApp.directive('dateFormat', function() {
 		}
 	};
 });
-
-function LoginController($scope, $http, $cookies, $location) {
-	$scope.signIn = function() {
-		// $http.get('registerUsers.json').success(function(data) {
-		//   $scope.listUsers = data;
-		// });
-		$http({
-			url: 'registerUsers.json',
-			method: 'GET',
-			transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-				$scope.listUsers = data;
-			})
-		});
-
-		_.forEach($scope.listUsers, function(curUser) {
-			if (curUser.login == $scope.user.login && curUser.password == $scope.user.password){
-				$cookies.put("user-login", $scope.user.login);
-				$location.path("/dashboard");
-			}
-		});
-	};
- 
-	$scope.user = {};
-}
-
-function ForgotController($scope) {
-
-}
-function DashboardController($scope) {
-
-}
 
 function appendTransform(defaults, transform) {
 	defaults = angular.isArray(defaults) ? defaults : [defaults];

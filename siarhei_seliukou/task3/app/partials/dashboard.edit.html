@@ -1,0 +1,22 @@
+<form class="guest-form" name="guestForm" novalidate>
+	<div class="col-md-6 col-md-offset-3">
+		<label style="color:red;">{{ 'FIELDS_REQUIRED' | translate }}</label>
+		<div class="form-group">
+			<label>{{ 'NAME' | translate }}</label>
+			<input type="text" class="form-control" name="nameGuest" ng-model="user.name" placeholder="{{ 'ENTER_NAME' | translate }}" required russian-name>
+			<span class="error_span" ng-show="guestForm.nameGuest.$error.rName">{{ 'INVALID_NAME' | translate }}</span>
+		</div>
+		<div class="form-group">
+			<label>{{ 'AGE' | translate }}</label>
+			<input type="number" class="form-control" name="ageGuest" ng-model="user.age" placeholder="{{ 'ENTER_AGE' | translate }}" min="18" max="65" required>
+		</div>
+		<div class="form-group">
+			<label>{{ 'BIRTHDATE' | translate }}</label>
+			<input type="text" class="form-control" name="birthdateGuest" ng-model="user.birthdate" placeholder="{{ 'ENTER_BIRTHDATE' | translate }}" required date-format>
+			<span class="error_span" ng-show="guestForm.birthdateGuest.$error.dFormat">{{ 'INVALID_BIRTHDATE' | translate }}</span>
+		</div>
+		<div class="form-group">
+			<button ng-click="apply(user)" ng-disabled="guestForm.$invalid" class="btn btn-primary">{{ 'APPLY' | translate }}</button>
+		</div>
+	</div>
+</form>
