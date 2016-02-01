@@ -4,15 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AngularJS project for form fields validations</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="scripts/angular.min.js"></script>
+	<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./app/css/main.css">
+	<script src="/node_modules/angular/angular.js"></script>
 	<script src="main.js"></script>
-	<style>
-		.error_span {
-			color: red;
-		}
-	</style>
 </head>
 <body>
 	<div class="container">
@@ -28,7 +23,7 @@
 					<div class="form-group">
 						<label>Name</label>
 						<input type="text" class="form-control" name="nameGuest" ng-model="user.name" placeholder="Enter your name" required russian-name>
-						<span class="error_span" ng-show="guestForm.nameGuest.$error.rName">Error: This is not a valid name.</span>
+						<span class="error_span" ng-show="guestForm.nameGuest.$error.rName">Error: This is not a valid name. Current format: russian symbols, two words with separator ".", the first character must be uppercase.</span>
 					</div>
 					<div class="form-group">
 						<label>Age</label>
@@ -37,7 +32,7 @@
 					<div class="form-group">
 						<label>Birthdate</label>
 						<input type="text" class="form-control" name="birthdateGuest" ng-model="user.birthdate" placeholder="Enter your birthdate" required date-format>
-						<span class="error_span" ng-show="guestForm.birthdateGuest.$error.dFormat">Error: This is not a valid birthdate.</span>
+						<span class="error_span" ng-show="guestForm.birthdateGuest.$error.dFormat">Error: This is not a valid birthdate. Current format: DD MM YYYY</span>
 					</div>
 					<div class="form-group">
 						<button ng-click="apply(user)" ng-disabled="guestForm.$invalid" class="btn btn-primary">Aply</button>

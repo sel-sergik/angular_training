@@ -8,14 +8,17 @@ guestApp.directive('russianName', function() {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
-      ctrl.$parsers.unshift(function(viewValue) {
+      ctrl.$validators.russianName = function(modelValue, viewValue) {
+        if (ctrl.$isEmpty(modelValue)) {
+          return true;
+        }
         if (NAME_REGEXP.test(viewValue)) {
           ctrl.$setValidity('rName', true);
         } else {
           ctrl.$setValidity('rName', false);
         }
         return viewValue;
-      });
+      };
     }
   };
 });
@@ -25,14 +28,17 @@ guestApp.directive('dateFormat', function() {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
-      ctrl.$parsers.unshift(function(viewValue) {
+      ctrl.$validators.dateFormat = function(modelValue, viewValue) {
+        if (ctrl.$isEmpty(modelValue)) {
+          return true;
+        }
         if (DATE_REGEXP.test(viewValue)) {
           ctrl.$setValidity('dFormat', true);
         } else {
           ctrl.$setValidity('dFormat', false);
         }
         return viewValue;
-      });
+      };
     }
   };
 });
